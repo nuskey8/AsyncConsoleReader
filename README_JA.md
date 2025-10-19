@@ -13,7 +13,7 @@ AsyncConsoleReaderは`CancellationToken`に対応したNon-blocingな標準入�
 
 C#では標準入力の読み取りに`Console.ReadLine()`などが用いられますが、これは読み取りが完了するまでプロセスをブロックします。また、`CancellationToken`などを利用したキャンセルが不可能なため、`Task.Run`でラップしても入力が終わるまでスレッドプールのスレッドを占有してしまいます。
 
-AsyncConsoleReaderはネイティブで`Read/ReadLine`を再実装することにより、キャンセルに対応した実装を提供します。現在ではmacOS/Linux/Windowsに対応しています。
+AsyncConsoleReaderは`Console.ReadKey()`を用いて`Read/ReadLine`を再実装することにより、キャンセルに対応した実装を提供します。
 
 また、スレッドプール上で効率的にReadを実行するためのasync APIを用意しています。
 

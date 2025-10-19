@@ -13,7 +13,7 @@ AsyncConsoleReader is a library that provides non-blocking standard input readin
 
 In C#, `Console.ReadLine()` is commonly used for reading standard input, but it blocks the process until the reading is complete. Additionally, it cannot be canceled using mechanisms like `CancellationToken`. Even if wrapped in `Task.Run`, it occupies a thread from the thread pool until the input is finished.
 
-AsyncConsoleReader reimplements `Read/ReadLine` natively to provide an implementation that supports cancellation. It currently supports macOS, Linux, and Windows.
+AsyncConsoleReader provides a cancelable implementation of `Read/ReadLine` by re-implementing them using `Console.ReadKey()`.
 
 It also provides async APIs for efficiently performing reads on the thread pool.
 
