@@ -20,6 +20,24 @@ AsyncConsoleReaderはネイティブで`Read/ReadLine`を再実装すること�
 > [!NOTE]
 > AsyncConsoleReaderのasync APIはあくまでバックグランドスレッドで効率的に`Read()`を実行するためのヘルパーであり、読み取り自体が非同期に行われるわけではありません。
 
+## インストール
+
+### NuGet packages
+
+AsyncConsoleReaderを利用するには.NET 8.0以上が必要です。パッケージはNuGetから入手できます。
+
+#### .NET CLI
+
+```
+dotnet add package AsyncConsoleReader
+```
+
+#### Package Manager
+
+```
+Install-Package AsyncConsoleReader
+```
+
 ## 使い方
 
 `AsyncConsole`を用いて`Read/ReadKey/ReadLine`を呼び出すことができます。これらは`System.Console`と同等のAPIを持ちますが、`CancellationToken`を渡してキャンセル処理を行うことが可能です。

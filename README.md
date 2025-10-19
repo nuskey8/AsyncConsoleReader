@@ -20,6 +20,24 @@ It also provides async APIs for efficiently performing reads on the thread pool.
 > [!NOTE]
 > The async APIs of AsyncConsoleReader are helpers for efficiently executing `Read()` on background threads. The reading itself is not performed asynchronously.
 
+## Installation
+
+### NuGet packages
+
+To use AsyncConsoleReader, .NET 8.0 or higher is required. Packages can be obtained from NuGet.
+
+#### .NET CLI
+
+```
+dotnet add package AsyncConsoleReader
+```
+
+#### Package Manager
+
+```
+Install-Package AsyncConsoleReader
+```
+
 ## Usage
 
 You can call `Read/ReadKey/ReadLine` using `AsyncConsole`. These APIs are equivalent to `System.Console` but allow cancellation by passing a `CancellationToken`.
