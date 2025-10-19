@@ -6,34 +6,58 @@ namespace AsyncConsoleReader;
 
 public static class AsyncConsole
 {
-    public static ValueTask<ConsoleKeyInfo> ReadKeyAsync(bool intercept = false, CancellationToken cancellationToken = default)
+    public static async ValueTask<ConsoleKeyInfo> ReadKeyAsync(bool intercept = false, CancellationToken cancellationToken = default)
     {
         var source = Worker<ConsoleKeyInfo, bool>.Rent(
             static (intercept, ct) => ReadKey(intercept, ct),
             intercept,
             cancellationToken);
-        ThreadPool.UnsafeQueueUserWorkItem(source, false);
-        return source.AsValueTask();
+
+        try
+        {
+            ThreadPool.UnsafeQueueUserWorkItem(source, false);
+            return await source.AsValueTask();
+        }
+        finally
+        {
+            Worker<ConsoleKeyInfo, bool>.Return(source);
+        }
     }
 
-    public static ValueTask<string?> ReadLineAsync(CancellationToken cancellationToken = default)
+    public static async ValueTask<string?> ReadLineAsync(CancellationToken cancellationToken = default)
     {
         var source = Worker<string?, object?>.Rent(
             static (_, ct) => ReadLine(ct),
             null,
             cancellationToken);
-        ThreadPool.UnsafeQueueUserWorkItem(source, false);
-        return source.AsValueTask();
+
+        try
+        {
+            ThreadPool.UnsafeQueueUserWorkItem(source, false);
+            return await source.AsValueTask();
+        }
+        finally
+        {
+            Worker<string?, object?>.Return(source);
+        }
     }
 
-    public static ValueTask<int> ReadAsync(CancellationToken cancellationToken = default)
+    public static async ValueTask<int> ReadAsync(CancellationToken cancellationToken = default)
     {
         var source = Worker<int, object?>.Rent(
             static (_, ct) => Read(ct),
             null,
             cancellationToken);
-        ThreadPool.UnsafeQueueUserWorkItem(source, false);
-        return source.AsValueTask();
+
+        try
+        {
+            ThreadPool.UnsafeQueueUserWorkItem(source, false);
+            return await source.AsValueTask();
+        }
+        finally
+        {
+            Worker<int, object?>.Return(source);
+        }
     }
 
     public static ConsoleKeyInfo ReadKey(bool intercept = false, CancellationToken cancellationToken = default)
