@@ -62,7 +62,7 @@ catch (Exception ex)
 You can also use the asynchronous API.
 
 ```cs
-var line = await AsyncConsole.ReadKey(false, cts.Token);
+var line = await AsyncConsole.ReadKeyAsync(false, cts.Token);
 ```
 
 ## License

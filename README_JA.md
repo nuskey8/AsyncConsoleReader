@@ -62,7 +62,7 @@ catch (Exception ex)
 また、非同期APIも利用できます。
 
 ```cs
-var line = await AsyncConsole.ReadKey(false, cts.Token);
+var line = await AsyncConsole.ReadKeyAsync(false, cts.Token);
 ```
 
 ## ライセンス
